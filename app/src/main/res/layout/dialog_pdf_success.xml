@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="26dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/glass_dialog_bg"
+    android:elevation="14dp"
+    android:clipToOutline="true">
+
+<!--    &lt;!&ndash; Success Icon &ndash;&gt;-->
+<!--    <ImageView-->
+<!--        android:layout_width="70dp"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:src="@drawable/ic_success"-->
+<!--        android:tint="#2ECC71"-->
+<!--        android:layout_marginBottom="18dp" />-->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PDF Downloaded!"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/txy_clr"
+        android:layout_marginBottom="6dp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your file is ready to view or share."
+        android:textSize="14sp"
+        android:textColor="@color/tint_clr"
+        android:layout_marginBottom="26dp"
+        android:gravity="center" />
+
+
+    <Button
+        android:id="@+id/btnOpen"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:text="OPEN"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:background="@drawable/btn_primary"
+        android:elevation="6dp"
+        android:layout_marginBottom="14dp" />
+
+
+    <Button
+        android:id="@+id/btnShare"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:text="SHARE"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:background="@drawable/btn_accent"
+        android:elevation="6dp"
+        android:layout_marginBottom="14dp" />
+
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:text="CLOSE"
+        android:textColor="@color/tint_clr"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:background="@drawable/btn_light"
+        android:elevation="3dp" />
+
+</LinearLayout>

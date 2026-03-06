@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".lain_dain_screen">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/base_color"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/back_arrow"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Maine Liye"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Main Content -->
+    <ScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@id/btnSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp">
+
+            <!-- Amount Box -->
+            <LinearLayout
+                android:id="@+id/amountBox"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_amount_box"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp">
+
+                <!-- Expression (e.g. 5×4) -->
+                <TextView
+                    android:id="@+id/tvExpression"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    android:text="5×4" />
+
+                <!-- Result (e.g. Rs 20) -->
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="Rs 0" />
+
+            </LinearLayout>
+
+            <!-- Tafseel Input -->
+            <EditText
+                android:id="@+id/tafaseelInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="Tafseel (optional)"
+                android:textColorHint="@color/gray"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:background="@drawable/bg_amount_box"
+                android:padding="14dp"
+                android:visibility="gone"
+                android:inputType="textCapSentences|textMultiLine"
+                android:maxLines="3" />
+
+            <!-- Date + Add Bills layout (exact design as image) -->
+            <LinearLayout
+                android:id="@+id/dateBillsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:visibility="gone"
+                android:weightSum="2">
+
+                <!-- Date button -->
+                <LinearLayout
+                    android:id="@+id/dateLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_outline"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/calendar"
+                        android:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/tvSelectedDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="22nd Oct, 25"
+                        android:textSize="12sp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+                <!-- Add bills button -->
+                <LinearLayout
+                    android:id="@+id/addBillsLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_rounded_outline"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginStart="8dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/camera"
+                        android:tint="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="Add bill"
+                        android:textSize="16sp"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/selectedImageLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:visibility="gone"
+                android:padding="2dp">
+
+                <ImageView
+                    android:id="@+id/selectedImageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    android:background="@drawable/rounded_image_view"
+                    android:src="@drawable/profile" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="SAVE"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_save_button"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@id/calculatorLayout"
+        app:layout_constraintTop_toBottomOf="@id/mainScrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <GridLayout
+        android:id="@+id/calculatorLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button android:text="C" style="@style/CalcButtonStyle"
+            android:backgroundTint="#e5edf0"
+            android:textColor="@color/black"/>
+        <Button android:text="÷" style="@style/CalcButtonStyle"
+            android:backgroundTint="#e5edf0"
+            android:textColor="@color/black"/>
+        <Button android:text="×" style="@style/CalcButtonStyle"
+            android:backgroundTint="#e5edf0"
+            android:textColor="@color/black"/>
+        <ImageButton android:id="@+id/btnBackspace"
+            android:src="@drawable/backspace"
+            style="@style/CalcButtonStyle"
+            android:backgroundTint="#e5edf0"/>
+
+        <Button android:text="7" style="@style/CalcButtonStyle"/>
+        <Button android:text="8" style="@style/CalcButtonStyle"/>
+        <Button android:text="9" style="@style/CalcButtonStyle"/>
+        <Button android:text="+" style="@style/CalcButtonStyle" android:layout_height="80dp" android:layout_rowSpan="2" android:backgroundTint="#a1b5bc" android:textColor="@android:color/white"/>
+
+        <Button android:text="4" style="@style/CalcButtonStyle"/>
+        <Button android:text="5" style="@style/CalcButtonStyle"/>
+        <Button android:text="6" style="@style/CalcButtonStyle"/>
+
+        <Button android:text="1" style="@style/CalcButtonStyle"/>
+        <Button android:text="2" style="@style/CalcButtonStyle"/>
+        <Button android:text="3" style="@style/CalcButtonStyle"/>
+        <Button android:text="-" style="@style/CalcButtonStyle" android:backgroundTint="#a1b5bc" android:textColor="@android:color/white"/>
+
+        <Button android:text="0" style="@style/CalcButtonStyle"/>
+        <Button android:text="00" style="@style/CalcButtonStyle"/>
+        <Button android:text="." style="@style/CalcButtonStyle"/>
+        <Button android:text="=" style="@style/CalcButtonStyle" android:backgroundTint="#e5edf0" android:textColor="@color/black"/>
+    </GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

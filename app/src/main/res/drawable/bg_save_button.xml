@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Pressed state (now lighter / shiny) -->
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#FFFFFF"
+                android:centerColor="#E9ECEF"
+                android:endColor="#C9CDD1"
+                android:angle="270" />
+            <corners android:radius="18dp" />
+            <stroke android:width="1dp" android:color="#D5D9DD" />
+            <padding
+                android:left="10dp"
+                android:right="10dp"
+                android:top="8dp"
+                android:bottom="8dp" />
+        </shape>
+    </item>
+
+    <!-- Default (normal) state – deeper metallic look -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#D0D4D9"
+                android:centerColor="#BFC4C9"
+                android:endColor="#AEB4B9"
+                android:angle="270" />
+            <corners android:radius="18dp" />
+            <stroke android:width="1dp" android:color="#B0B5BA" />
+            <padding
+                android:left="10dp"
+                android:right="10dp"
+                android:top="8dp"
+                android:bottom="8dp" />
+        </shape>
+    </item>
+
+</selector>

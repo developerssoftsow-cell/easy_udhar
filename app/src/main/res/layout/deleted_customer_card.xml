@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <LinearLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/person"
+                android:tint="@color/red_primary"
+                android:padding="8dp"
+                android:layout_marginEnd="12dp" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvCustomerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Name"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tvDeletedDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deleted on: 12 Dec 2024"
+                    android:textSize="12sp"
+                    android:textColor="@color/tint_clr"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnRestore"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:text="Restore"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:background="@drawable/restore_button_bg"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/deleteOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/light_red"
+            android:visibility="gone"
+            android:padding="16dp">
+
+
+            <Button
+                android:id="@+id/btnCancelDelete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/close"
+                android:layout_marginEnd="12dp"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="                     "
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:gravity="center" />
+
+
+            <Button
+                android:id="@+id/btnConfirmDelete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_delete_red"
+                android:layout_marginStart="12dp"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

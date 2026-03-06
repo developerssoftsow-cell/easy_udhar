@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_khata"
+        android:icon="@drawable/book"
+        android:title="Khata" />
+
+    <item
+        android:id="@+id/nav_batwa"
+        android:icon="@drawable/wallet"
+        android:title="Transactions" />
+
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/account"
+        android:title="Account" />
+
+</menu>

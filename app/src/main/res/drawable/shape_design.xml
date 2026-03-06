@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="100dp"
+    android:viewportWidth="200"
+    android:viewportHeight="100">
+
+    <!-- More Curved Bottom -->
+    <path
+        android:fillColor="#AD9980"
+        android:pathData="M0,0 L200,0 L200,60 Q100,140 0,60 Z" />
+</vector>
+
