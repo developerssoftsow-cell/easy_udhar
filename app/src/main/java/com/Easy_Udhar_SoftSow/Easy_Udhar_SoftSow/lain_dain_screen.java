@@ -24,8 +24,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.personal_transaction;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction_class;
 import com.Easy_Udhar_SoftSow.R;
 
 import net.objecthunter.exp4j.Expression;
@@ -61,7 +61,7 @@ public class lain_dain_screen extends AppCompatActivity {
 
     // 🔹 Edit mode fields (UPDATED)
     private boolean isEditMode = false;
-    private transaction existingTransaction;
+    private transaction_class existingTransaction;
     private personal_transaction existingPersonalTransaction; // NEW: For personal transaction edit
 
     // 🔹 Cursor blinking fields
@@ -131,7 +131,7 @@ public class lain_dain_screen extends AppCompatActivity {
 
             // Check for customer transaction edit
             if (isEditMode && receivedIntent.hasExtra("existing_transaction")) {
-                existingTransaction = (transaction) receivedIntent.getSerializableExtra("existing_transaction");
+                existingTransaction = (transaction_class) receivedIntent.getSerializableExtra("existing_transaction");
                 if (existingTransaction != null) {
                     loadExistingTransaction(existingTransaction);
                 }
@@ -283,7 +283,7 @@ public class lain_dain_screen extends AppCompatActivity {
     }
 
     // 🔹 EXISTING CUSTOMER TRANSACTION LOAD KARNE KA METHOD
-    private void loadExistingTransaction(transaction existingTransaction) {
+    private void loadExistingTransaction(transaction_class existingTransaction) {
         Log.d("EditMode", "🔄 Loading existing customer transaction for editing");
 
         // Amount set karo
@@ -427,7 +427,7 @@ public class lain_dain_screen extends AppCompatActivity {
 
     // 🔹 CUSTOMER TRANSACTION SAVE/UPDATE HANDLE KARNE KA METHOD
     private void handleCustomerTransactionSave(String resultText, String tafseel, String date) {
-        transaction transaction = new transaction();
+        transaction_class transaction = new transaction_class();
         transaction.setType(mode);
         transaction.setAmount(resultText);
         transaction.setDescription(tafseel);
@@ -658,7 +658,7 @@ public class lain_dain_screen extends AppCompatActivity {
         }
 
         // Inflate bottom sheet view
-        View sheetView = getLayoutInflater().inflate(R.layout.bottomsheet_add_image, null);
+        View sheetView = getLayoutInflater().inflate(R.layout.dialog_bottom_add_image, null);
 
         // ✅ Dialog ka istemal karein
         final android.app.Dialog dialog = new android.app.Dialog(this);

@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.adapter.deleted_customers_adapter;
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.deleted_customer;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

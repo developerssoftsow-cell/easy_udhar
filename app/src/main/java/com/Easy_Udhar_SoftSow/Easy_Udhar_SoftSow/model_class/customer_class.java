@@ -1,23 +1,23 @@
 package com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class;
 
-public class customer {
+public class customer_class {
     private int id;
     private String name;
     private String phone;
     private double netAmount;
     private String profileImagePath; // ✅ NEW FIELD
 
-    public customer() {}
+    public customer_class() {}
 
     // 🔹 Constructor without profile image (backward compatibility)
-    public customer(String name, String phone) {
+    public customer_class(String name, String phone) {
         this.name = name;
         this.phone = phone;
         this.profileImagePath = "";
     }
 
     // 🔹 Constructor with all fields
-    public customer(String name, String phone, String profileImagePath) {
+    public customer_class(String name, String phone, String profileImagePath) {
         this.name = name;
         this.phone = phone;
         this.profileImagePath = profileImagePath;
@@ -132,7 +132,7 @@ public class customer {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        customer customer = (customer) obj;
+        customer_class customer = (customer_class) obj;
         return id == customer.id &&
                 Double.compare(customer.netAmount, netAmount) == 0 &&
                 java.util.Objects.equals(name, customer.name) &&
@@ -147,7 +147,7 @@ public class customer {
     }
 
     // ✅ Copy constructor
-    public customer(customer other) {
+    public customer_class(customer_class other) {
         this.id = other.id;
         this.name = other.name;
         this.phone = other.phone;

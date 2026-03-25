@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.applock_helper;
 import com.Easy_Udhar_SoftSow.R;
 
 public class MainActivity extends AppCompatActivity {

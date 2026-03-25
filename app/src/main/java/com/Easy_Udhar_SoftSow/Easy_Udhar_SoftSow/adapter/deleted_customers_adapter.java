@@ -34,7 +34,7 @@ public class deleted_customers_adapter extends RecyclerView.Adapter<deleted_cust
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.deleted_customer_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_deleted_customer, parent, false);
         return new ViewHolder(view);
     }
 

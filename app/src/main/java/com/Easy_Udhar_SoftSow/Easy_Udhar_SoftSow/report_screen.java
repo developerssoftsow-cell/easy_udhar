@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.adapter.transaction_adapter;
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.personal_transaction;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.itextpdf.text.Chunk;

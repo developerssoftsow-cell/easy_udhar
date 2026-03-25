@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.customer_detail;
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.add_contact_class;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class add_contact_adapter extends RecyclerView.Adapter<add_contact_adapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.contact_card, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_contact, parent, false);
         return new ViewHolder(view);
     }
 

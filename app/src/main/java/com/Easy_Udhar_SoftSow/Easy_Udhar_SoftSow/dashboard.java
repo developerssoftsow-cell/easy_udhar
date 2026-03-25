@@ -38,8 +38,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.adapter.dashboard_adapter;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer_class;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.itextpdf.text.Chunk;
@@ -61,9 +61,9 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
 
     private RecyclerView recyclerView;
     private dashboard_adapter adapter;
-    private List<customer> customerList;
-    private List<customer> allCustomersList;
-    private List<customer> filteredCustomerList;
+    private List<customer_class> customerList;
+    private List<customer_class> allCustomersList;
+    private List<customer_class> filteredCustomerList;
     private data_holder dbHelper;
     private LinearLayout middleSection;
     private LinearLayout redCard, greenCard;
@@ -412,7 +412,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
     }
 
     private void applyCustomerFilter(String filterType) {
-        List<customer> filteredList = new ArrayList<>();
+        List<customer_class> filteredList = new ArrayList<>();
 
         switch (filterType) {
             case "all":
@@ -449,7 +449,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
 
             case "numeric":
                 // Filter only numeric names
-                for (customer customer : allCustomersList) {
+                for (customer_class customer : allCustomersList) {
                     if (isNumeric(customer.getName())) {
                         filteredList.add(customer);
                     }
@@ -674,7 +674,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
 
     private void loadCustomers() {
         allCustomersList.clear();
-        List<customer> customers = dbHelper.getAllCustomers();
+        List<customer_class> customers = dbHelper.getAllCustomers();
         allCustomersList.addAll(customers);
 
         // Current filter ke according customers show karo
@@ -718,7 +718,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
         } else {
             // SEARCH QUERY KE ACCORDING FILTER KARO
             String query = currentSearchQuery.toLowerCase().trim();
-            for (customer customer : customerList) {
+            for (customer_class customer : customerList) {
                 if (customer.getName() != null && customer.getName().toLowerCase().contains(query)) {
                     filteredCustomerList.add(customer);
                 }
@@ -780,12 +780,12 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
         double totalGreen = 0;
 
         // ✅ IMPORTANT: Fresh data lein database se (NOT from allCustomersList)
-        List<customer> freshCustomers = dbHelper.getAllCustomers();
+        List<customer_class> freshCustomers = dbHelper.getAllCustomers();
 
         Log.d("Dashboard", "=== UPDATING TOTAL CARDS ===");
         Log.d("Dashboard", "Fresh customers from DB: " + freshCustomers.size());
 
-        for (customer customer : freshCustomers) {
+        for (customer_class customer : freshCustomers) {
             double netAmount = customer.getNetAmount();
 
             if (netAmount < 0) {
@@ -811,7 +811,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
 
     private double calculateTotalRedAmount() {
         double total = 0;
-        for (customer customer : allCustomersList) {
+        for (customer_class customer : allCustomersList) {
             if (customer.getNetAmount() < 0) {
                 total += Math.abs(customer.getNetAmount());
             }
@@ -821,7 +821,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
 
     private double calculateTotalGreenAmount() {
         double total = 0;
-        for (customer customer : allCustomersList) {
+        for (customer_class customer : allCustomersList) {
             if (customer.getNetAmount() > 0) {
                 total += customer.getNetAmount();
             }
@@ -833,7 +833,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
         customerList.clear();
         currentFilter = type;
 
-        for (customer customer : allCustomersList) {
+        for (customer_class customer : allCustomersList) {
             if ("red".equals(type) && customer.getNetAmount() < 0) {
                 customerList.add(customer);
             } else if ("green".equals(type) && customer.getNetAmount() > 0) {
@@ -996,7 +996,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
     }
 
     @Override
-    public void onCustomerClick(customer customer) {
+    public void onCustomerClick(customer_class customer) {
         // Customer card click par customer_detail screen par jao
         Intent intent = new Intent(dashboard.this, customer_detail.class);
         intent.putExtra("customer_id", customer.getId());
@@ -1030,7 +1030,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
     private void generatePdfReport(String startDate, String endDate) {
         try {
             // Filter customers based on date range (currently showing all, you can implement date filtering)
-            List<customer> customersForPdf = getCustomersForPdf(startDate, endDate);
+            List<customer_class> customersForPdf = getCustomersForPdf(startDate, endDate);
 
             String fileName = "Khatay_Report_" + System.currentTimeMillis() + ".pdf";
 
@@ -1087,7 +1087,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
             double totalDiye = 0;
             double totalLiye = 0;
 
-            for (customer customer : customersForPdf) {
+            for (customer_class customer : customersForPdf) {
                 table.addCell(new Phrase(customer.getName(), dataFont));
 
                 if (customer.getNetAmount() > 0) {
@@ -1119,7 +1119,7 @@ public class dashboard extends AppCompatActivity implements dashboard_adapter.On
         }
     }
 
-    private List<customer> getCustomersForPdf(String startDate, String endDate) {
+    private List<customer_class> getCustomersForPdf(String startDate, String endDate) {
         // Currently returning all customers
         // You can implement date-based filtering here
         return allCustomersList;

@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction_class;
 import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.personal_transaction;
 import com.Easy_Udhar_SoftSow.R;
 
@@ -29,7 +29,7 @@ public class full_detail_screen extends AppCompatActivity {
     private LinearLayout descriptionLayout, amountField;
 
     // दोनों प्रकार के transactions handle करने के लिए
-    private transaction currentTransaction;
+    private transaction_class currentTransaction;
     private personal_transaction currentPersonalTransaction;
 
     private data_holder dbHelper;
@@ -73,7 +73,7 @@ public class full_detail_screen extends AppCompatActivity {
         if (intent != null) {
             // Check क्या यह customer transaction है
             if (intent.hasExtra("transaction")) {
-                currentTransaction = (transaction) intent.getSerializableExtra("transaction");
+                currentTransaction = (transaction_class) intent.getSerializableExtra("transaction");
                 customerId = intent.getIntExtra("customer_id", -1);
                 transactionType = "customer";
 
@@ -95,7 +95,7 @@ public class full_detail_screen extends AppCompatActivity {
         }
     }
 
-    private void displayCustomerTransactionDetails(transaction transaction) {
+    private void displayCustomerTransactionDetails(transaction_class transaction) {
         // Set transaction type
         setupTransactionType(transaction.getType());
 
@@ -329,7 +329,7 @@ public class full_detail_screen extends AppCompatActivity {
 
     private void handleCustomerTransactionUpdate(Intent data) {
         if (data != null && data.hasExtra("updated_transaction")) {
-            transaction updatedTransaction = (transaction) data.getSerializableExtra("updated_transaction");
+            transaction_class updatedTransaction = (transaction_class) data.getSerializableExtra("updated_transaction");
             if (updatedTransaction != null) {
                 // Database mein transaction update karo
                 boolean updateSuccess = dbHelper.updateTransaction(

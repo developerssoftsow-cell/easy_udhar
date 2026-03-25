@@ -2,7 +2,7 @@ package com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class;
 
 import java.io.Serializable;
 
-public class transaction implements Serializable {
+public class transaction_class implements Serializable {
     private String id;
     private String type; // "liye" or "diye"
     private String amount;
@@ -14,9 +14,9 @@ public class transaction implements Serializable {
     private int customerId; // ✅ NEW FIELD ADDED
 
     // Constructors
-    public transaction() {}
+    public transaction_class() {}
 
-    public transaction(String type, String amount, String description, String dateTime, String balance) {
+    public transaction_class(String type, String amount, String description, String dateTime, String balance) {
         this.type = type;
         this.amount = amount;
         this.description = description;
@@ -25,7 +25,7 @@ public class transaction implements Serializable {
     }
 
     // Constructor with image path
-    public transaction(String type, String amount, String description, String dateTime, String balance, String imagePath) {
+    public transaction_class(String type, String amount, String description, String dateTime, String balance, String imagePath) {
         this.type = type;
         this.amount = amount;
         this.description = description;
@@ -35,7 +35,7 @@ public class transaction implements Serializable {
     }
 
     // ✅ UPDATED: Constructor with all fields including customerId
-    public transaction(String type, String amount, String description, String dateTime, String balance, String imagePath, int transactionId, int customerId) {
+    public transaction_class(String type, String amount, String description, String dateTime, String balance, String imagePath, int transactionId, int customerId) {
         this.type = type;
         this.amount = amount;
         this.description = description;
@@ -149,7 +149,7 @@ public class transaction implements Serializable {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
 
-        transaction that = (transaction) obj;
+        transaction_class that = (transaction_class) obj;
         return transactionId == that.transactionId &&
                 customerId == that.customerId &&
                 java.util.Objects.equals(type, that.type) &&
@@ -167,7 +167,7 @@ public class transaction implements Serializable {
     }
 
     // ✅ Copy constructor
-    public transaction(transaction other) {
+    public transaction_class(transaction_class other) {
         this.type = other.type;
         this.amount = other.amount;
         this.description = other.description;

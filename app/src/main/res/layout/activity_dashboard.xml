@@ -306,7 +306,7 @@
                 android:minHeight="400dp"
                 android:visibility="gone"
                 android:padding="8dp"
-                tools:listitem="@layout/dashboard_card" />
+                tools:listitem="@layout/item_dashboard" />
 
 
             <LinearLayout

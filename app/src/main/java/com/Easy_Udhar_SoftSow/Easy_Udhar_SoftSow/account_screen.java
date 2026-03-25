@@ -151,7 +151,7 @@ public class account_screen extends AppCompatActivity {
     }
 
     private void showLanguageBottomSheet() {
-        View sheetView = getLayoutInflater().inflate(R.layout.language_bottom, null);
+        View sheetView = getLayoutInflater().inflate(R.layout.dialog_language_bottom, null);
 
         android.app.Dialog dialog = new android.app.Dialog(this);
         dialog.setContentView(sheetView);

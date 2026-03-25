@@ -23,21 +23,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer_class;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 
 import java.util.List;
 
 public class dashboard_adapter extends RecyclerView.Adapter<dashboard_adapter.ViewHolder> {
 
-    private List<customer> customerList;
+    private List<customer_class> customerList;
     private OnCustomerClickListener listener;
     private Context context;
     private data_holder dbHelper;
     private int currentSelectedPosition = -1;
 
-    public dashboard_adapter(List<customer> customerList, OnCustomerClickListener listener, Context context) {
+    public dashboard_adapter(List<customer_class> customerList, OnCustomerClickListener listener, Context context) {
         this.customerList = customerList;
         this.listener = listener;
         this.context = context;
@@ -47,13 +47,13 @@ public class dashboard_adapter extends RecyclerView.Adapter<dashboard_adapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_card, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_dashboard, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        customer customer = customerList.get(position);
+        customer_class customer = customerList.get(position);
 
         // ✅ Basic data set karo
         holder.name.setText(customer.getName());
@@ -132,7 +132,7 @@ public class dashboard_adapter extends RecyclerView.Adapter<dashboard_adapter.Vi
 
     // ✅ CORRECTED: Delete customer method (NO NAVIGATION)
 // ✅ CORRECTED: Delete customer method (INSTANT UPDATE)
-    private void deleteCustomer(customer customer, int position) {
+    private void deleteCustomer(customer_class customer, int position) {
         Log.d("Delete", "🔄 Deleting customer: " + customer.getName() + ", ID: " + customer.getId());
 
         boolean success = dbHelper.deleteCustomer(customer.getId());
@@ -224,7 +224,7 @@ public class dashboard_adapter extends RecyclerView.Adapter<dashboard_adapter.Vi
         return customerList.size();
     }
 
-    public void updateCustomerList(List<customer> newCustomerList) {
+    public void updateCustomerList(List<customer_class> newCustomerList) {
         this.customerList.clear();
         this.customerList.addAll(newCustomerList);
         notifyDataSetChanged();
@@ -281,6 +281,6 @@ public class dashboard_adapter extends RecyclerView.Adapter<dashboard_adapter.Vi
     }
 
     public interface OnCustomerClickListener {
-        void onCustomerClick(customer customer);
+        void onCustomerClick(customer_class customer);
     }
 }

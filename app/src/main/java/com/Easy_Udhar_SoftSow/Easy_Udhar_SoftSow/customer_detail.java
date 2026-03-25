@@ -37,9 +37,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer_class;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction_class;
 import com.Easy_Udhar_SoftSow.R;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -62,7 +62,7 @@ public class customer_detail extends AppCompatActivity {
     private LinearLayout btnMaineLiye, btnMaineDiye, middleSection, transactionsContainer;
     private ImageView btnBack, profileImage, menuIcon; // ✅ menuIcon add kiya
     private FrameLayout imgStatusIcon, liyeHainSub, lenayHain;
-    private List<transaction> transactionsList = new ArrayList<>();
+    private List<transaction_class> transactionsList = new ArrayList<>();
     private View reportsSection;
     private data_holder dbHelper;
     private int customerId;
@@ -272,7 +272,7 @@ public class customer_detail extends AppCompatActivity {
 
     private void loadCustomerData() {
         // ✅ UPDATED: Database se customer details load karein including profile image
-        customer customer = dbHelper.getCustomerById(customerId);
+        customer_class customer = dbHelper.getCustomerById(customerId);
 
         if (customer != null) {
             customerName = customer.getName(); // Update customer name
@@ -365,12 +365,12 @@ public class customer_detail extends AppCompatActivity {
         transactionsList.clear();
 
         // Database se transactions load karein
-        List<transaction> dbTransactions = dbHelper.getCustomerTransactions(customerId);
+        List<transaction_class> dbTransactions = dbHelper.getCustomerTransactions(customerId);
 
         // ✅ SORT TRANSACTIONS - NEWEST FIRST (BY DATE TIME)
-        Collections.sort(dbTransactions, new Comparator<transaction>() {
+        Collections.sort(dbTransactions, new Comparator<transaction_class>() {
             @Override
-            public int compare(transaction t1, transaction t2) {
+            public int compare(transaction_class t1, transaction_class t2) {
                 // Naya transaction pehle aaye
                 return t2.getDateTime().compareTo(t1.getDateTime());
             }
@@ -383,7 +383,7 @@ public class customer_detail extends AppCompatActivity {
 
         // Transaction cards add karein (SORTED ORDER MEIN)
         transactionsContainer.removeAllViews(); // Pehle clear karein
-        for (transaction transaction : transactionsList) {
+        for (transaction_class transaction : transactionsList) {
             addTransactionCard(transaction);
         }
 
@@ -405,7 +405,7 @@ public class customer_detail extends AppCompatActivity {
         if (requestCode == 1) {
             // Naya transaction add hua hai
             if (resultCode == RESULT_OK && data != null && data.hasExtra("transaction")) {
-                transaction newTransaction = (transaction) data.getSerializableExtra("transaction");
+                transaction_class newTransaction = (transaction_class) data.getSerializableExtra("transaction");
                 if (newTransaction != null) {
                     Log.d("CustomerDetail", "🆕 New transaction received - Date: " + newTransaction.getDateTime());
 
@@ -456,15 +456,15 @@ public class customer_detail extends AppCompatActivity {
         transactionsContainer.removeAllViews();
 
         // ✅ Pehle transactions ko sort karein - newest first
-        Collections.sort(transactionsList, new Comparator<transaction>() {
+        Collections.sort(transactionsList, new Comparator<transaction_class>() {
             @Override
-            public int compare(transaction t1, transaction t2) {
+            public int compare(transaction_class t1, transaction_class t2) {
                 return t2.getDateTime().compareTo(t1.getDateTime());
             }
         });
 
         // ✅ Ab sorted list ke hisaab se cards add karein
-        for (transaction transaction : transactionsList) {
+        for (transaction_class transaction : transactionsList) {
             addTransactionCard(transaction);
         }
 
@@ -587,11 +587,11 @@ public class customer_detail extends AppCompatActivity {
         }
     }
 
-    private void addTransactionCard(transaction transaction) {
+    private void addTransactionCard(transaction_class transaction) {
         if (transactionsContainer == null) return;
 
         // Layout inflate karein
-        View cardView = LayoutInflater.from(this).inflate(R.layout.customer_detail_card, transactionsContainer, false);
+        View cardView = LayoutInflater.from(this).inflate(R.layout.item_customer_detail, transactionsContainer, false);
 
         // Views find karein
         TextView tvDateTime = cardView.findViewById(R.id.tvDateTime);
@@ -660,8 +660,8 @@ public class customer_detail extends AppCompatActivity {
     private void generateCustomerPdfReport() {
         try {
             // Database se customer details aur transactions load karein
-            customer customer = dbHelper.getCustomerById(customerId);
-            List<transaction> transactions = dbHelper.getCustomerTransactions(customerId);
+            customer_class customer = dbHelper.getCustomerById(customerId);
+            List<transaction_class> transactions = dbHelper.getCustomerTransactions(customerId);
 
             if (customer == null) {
                 Toast.makeText(this, "Customer data not found", Toast.LENGTH_SHORT).show();
@@ -719,7 +719,7 @@ public class customer_detail extends AppCompatActivity {
 
                 // Table data
                 Font dataFont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
-                for (transaction t : transactions) {
+                for (transaction_class t : transactions) {
                     table.addCell(new Phrase(t.getDateTime(), dataFont));
                     table.addCell(new Phrase("liye".equals(t.getType()) ? "Maine Liye" : "Maine Diye", dataFont));
                     table.addCell(new Phrase("Rs. " + t.getAmount(), dataFont));
@@ -748,7 +748,7 @@ public class customer_detail extends AppCompatActivity {
     // ✅ WHATSAPP MESSAGE BHEJNE KA METHOD
     private void sendWhatsAppMessage() {
         // Database se customer details load karein
-        customer customer = dbHelper.getCustomerById(customerId);
+        customer_class customer = dbHelper.getCustomerById(customerId);
 
         if (customer == null || customer.getPhone() == null || customer.getPhone().isEmpty() || customer.getPhone().equals("null")) {
             Toast.makeText(this, "Customer ka phone number available nahi hai", Toast.LENGTH_SHORT).show();
@@ -793,7 +793,7 @@ public class customer_detail extends AppCompatActivity {
     // ✅ SMS MESSAGE BHEJNE KA METHOD
     private void sendSmsMessage() {
         // Database se customer details load karein
-        customer customer = dbHelper.getCustomerById(customerId);
+        customer_class customer = dbHelper.getCustomerById(customerId);
 
         if (customer == null || customer.getPhone() == null || customer.getPhone().isEmpty() || customer.getPhone().equals("null")) {
             Toast.makeText(this, "Customer ka phone number available nahi hai", Toast.LENGTH_SHORT).show();

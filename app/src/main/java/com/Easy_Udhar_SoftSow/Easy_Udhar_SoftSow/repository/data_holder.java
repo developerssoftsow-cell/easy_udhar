@@ -1,4 +1,4 @@
-package com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class;
+package com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer_class;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.deleted_customer;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.personal_transaction;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.transaction_class;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -350,8 +355,8 @@ public class data_holder extends SQLiteOpenHelper {
         return result;
     }
 
-    public List<customer> getAllCustomers() {
-        List<customer> customerList = new ArrayList<>();
+    public List<customer_class> getAllCustomers() {
+        List<customer_class> customerList = new ArrayList<>();
         // ✅ DESCENDING ORDER - NAYA CARD TOP PAR
         String query = "SELECT * FROM " + TABLE_CUSTOMERS + " ORDER BY " + COLUMN_CUSTOMER_ID + " DESC";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -359,7 +364,7 @@ public class data_holder extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                customer customer = new customer();
+                customer_class customer = new customer_class();
                 customer.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_CUSTOMER_ID)));
                 customer.setName(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_NAME)));
                 customer.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_PHONE)));
@@ -379,15 +384,15 @@ public class data_holder extends SQLiteOpenHelper {
         return customerList;
     }
 
-    public customer getCustomerById(int customerId) {
+    public customer_class getCustomerById(int customerId) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_CUSTOMERS +
                 " WHERE " + COLUMN_CUSTOMER_ID + " = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(customerId)});
 
-        customer customer = null;
+        customer_class customer = null;
         if (cursor.moveToFirst()) {
-            customer = new customer();
+            customer = new customer_class();
             customer.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_CUSTOMER_ID)));
             customer.setName(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_NAME)));
             customer.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_PHONE)));
@@ -430,9 +435,9 @@ public class data_holder extends SQLiteOpenHelper {
                     " WHERE " + COLUMN_CUSTOMER_ID + " = ?";
             Cursor cursor = db.rawQuery(customerQuery, new String[]{String.valueOf(customerId)});
 
-            customer customerToDelete = null;
+            customer_class customerToDelete = null;
             if (cursor.moveToFirst()) {
-                customerToDelete = new customer();
+                customerToDelete = new customer_class();
                 customerToDelete.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_CUSTOMER_ID)));
                 customerToDelete.setName(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_NAME)));
                 customerToDelete.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_PHONE)));
@@ -539,8 +544,8 @@ public class data_holder extends SQLiteOpenHelper {
         return success;
     }
 
-    public List<customer> searchCustomers(String query) {
-        List<customer> customerList = new ArrayList<>();
+    public List<customer_class> searchCustomers(String query) {
+        List<customer_class> customerList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 
         String searchQuery = "SELECT * FROM " + TABLE_CUSTOMERS +
@@ -551,7 +556,7 @@ public class data_holder extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                customer customer = new customer();
+                customer_class customer = new customer_class();
                 customer.setId(cursor.getInt(cursor.getColumnIndex(COLUMN_CUSTOMER_ID)));
                 customer.setName(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_NAME)));
                 customer.setPhone(cursor.getString(cursor.getColumnIndex(COLUMN_CUSTOMER_PHONE)));
@@ -792,7 +797,7 @@ public class data_holder extends SQLiteOpenHelper {
 
     // ==================== TRANSACTION METHODS ====================
 
-    public long addTransaction(int customerId, transaction transaction) {
+    public long addTransaction(int customerId, transaction_class transaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -838,8 +843,8 @@ public class data_holder extends SQLiteOpenHelper {
         return result;
     }
 
-    public List<transaction> getCustomerTransactions(int customerId) {
-        List<transaction> transactionList = new ArrayList<>();
+    public List<transaction_class> getCustomerTransactions(int customerId) {
+        List<transaction_class> transactionList = new ArrayList<>();
         String query = "SELECT * FROM " + TABLE_TRANSACTIONS +
                 " WHERE " + COLUMN_CUSTOMER_ID + " = ?" +
                 " ORDER BY " + COLUMN_DATE_TIME + " DESC";
@@ -848,7 +853,7 @@ public class data_holder extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                transaction transaction = new transaction();
+                transaction_class transaction = new transaction_class();
 
                 // Basic transaction data
                 transaction.setType(cursor.getString(cursor.getColumnIndex(COLUMN_TYPE)));
@@ -971,7 +976,7 @@ public class data_holder extends SQLiteOpenHelper {
         }
     }
 
-    public boolean updateTransaction(int customerId, transaction oldTransaction, transaction newTransaction) {
+    public boolean updateTransaction(int customerId, transaction_class oldTransaction, transaction_class newTransaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues values = new ContentValues();

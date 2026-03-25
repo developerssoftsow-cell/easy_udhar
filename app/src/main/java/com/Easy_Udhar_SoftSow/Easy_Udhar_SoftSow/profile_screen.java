@@ -32,8 +32,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer;
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.customer_class;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 
 import java.io.File;
@@ -168,7 +168,7 @@ public class profile_screen extends AppCompatActivity {
 
     // 🔹 NEW: Image Picker Bottom Sheet
     private void showImagePickerBottomSheet() {
-        View sheetView = getLayoutInflater().inflate(R.layout.bottomsheet_add_image, null);
+        View sheetView = getLayoutInflater().inflate(R.layout.dialog_bottom_add_image, null);
 
         // ✅ Dialog ka istemal karein
         final Dialog dialog = new Dialog(this);
@@ -451,7 +451,7 @@ public class profile_screen extends AppCompatActivity {
     // 🔹 NEW: Delete Alert Box Show Karne Ka Method
     private void showDeleteAlert() {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.delete_alert_box);
+        dialog.setContentView(R.layout.dialog_delete_alert);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent); // Transparent background
         dialog.setCancelable(false);
 
@@ -500,7 +500,7 @@ public class profile_screen extends AppCompatActivity {
     // 🔹 NEW: Edit screen open karne ka method
     private void openEditScreen() {
         // Database se customer details load karein
-        customer customer = dbHelper.getCustomerById(customerId);
+        customer_class customer = dbHelper.getCustomerById(customerId);
 
         if (customer != null) {
             Intent intent = new Intent(profile_screen.this, add_screen.class);
@@ -516,7 +516,7 @@ public class profile_screen extends AppCompatActivity {
 
     private void loadCustomerData() {
         // Database se customer details load karein
-        customer customer = dbHelper.getCustomerById(customerId);
+        customer_class customer = dbHelper.getCustomerById(customerId);
 
         if (customer != null) {
             // Set name in both places

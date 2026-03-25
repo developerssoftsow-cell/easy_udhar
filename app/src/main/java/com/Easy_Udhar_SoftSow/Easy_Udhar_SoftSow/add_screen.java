@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.model_class.data_holder;
+import com.Easy_Udhar_SoftSow.Easy_Udhar_SoftSow.repository.data_holder;
 import com.Easy_Udhar_SoftSow.R;
 
 public class add_screen extends AppCompatActivity {
@@ -207,7 +207,7 @@ public class add_screen extends AppCompatActivity {
     // 🔹 Show save alert dialog (Only for new customer)
     private void showSaveAlert(String name, String phone, boolean isPhoneValid) {
         Dialog dialog = new Dialog(this);
-        dialog.setContentView(R.layout.save_alert_box);
+        dialog.setContentView(R.layout.dialog_save_alert);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent); // 👈 add this line
         dialog.setCancelable(false);
 
