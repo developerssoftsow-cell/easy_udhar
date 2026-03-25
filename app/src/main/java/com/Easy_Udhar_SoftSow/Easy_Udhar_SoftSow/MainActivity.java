@@ -18,14 +18,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// dark mode off kia maynay
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Log.d(TAG, "🚀 MainActivity started");
-
-        // Debug: Current app lock status
-        applock_helper.debugAppLockStatus(this);
 
         // Delay for splash animation
         new Handler().postDelayed(() -> {
@@ -41,114 +38,14 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "👤 User logged in: " + isLoggedIn);
 
         if (isLoggedIn) {
-            // User already logged in → check app lock
-            checkAppLockAndNavigate();
+            // User already logged in → go to dashboard
+            Log.d(TAG, "➡️ Going to dashboard (user logged in)");
+            navigateToDashboard();
         } else {
-            // User not logged in → go to dashboard directly (no lock for first time)
+            // User not logged in → go to dashboard directly
             Log.d(TAG, "➡️ Going to dashboard (first login)");
-            Intent intent = new Intent(MainActivity.this, dashboard.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
-    private void checkAppLockAndNavigate() {
-        try {
-            // Debug
-            applock_helper.debugAppLockStatus(this);
-
-            // ✅ IMPORTANT: Properly check if user is logged in
-            SharedPreferences prefs = getSharedPreferences("login", MODE_PRIVATE);
-            boolean isLoggedIn = prefs.getBoolean("logged_in", false);
-
-            Log.d(TAG, "👤 User logged in: " + isLoggedIn);
-
-            if (!isLoggedIn) {
-                Log.d(TAG, "➡️ User not logged in - going directly to dashboard");
-                navigateToDashboard();
-                return;
-            }
-
-            // ✅ Check if app lock is enabled
-            boolean isAppLockEnabled = applock_helper.isAppLockEnabled(this);
-            boolean isFingerprintLock = applock_helper.isFingerprintLockEnabled(this);
-
-            Log.d(TAG, "🔒 App Lock Enabled: " + isAppLockEnabled);
-            Log.d(TAG, "🔐 Fingerprint Lock Enabled: " + isFingerprintLock);
-
-            if (isAppLockEnabled && isFingerprintLock) {
-                Log.d(TAG, "✅ App lock and fingerprint BOTH enabled - showing authentication");
-
-                // Check fingerprint availability
-                if (applock_helper.isFingerprintAvailable(this)) {
-                    Log.d(TAG, "✅ Fingerprint available - showing dialog");
-                    showFingerprintAuthentication();
-                } else {
-                    Log.d(TAG, "❌ Fingerprint not available - showing password option");
-                    showPasswordDialog();
-                }
-            } else {
-                Log.d(TAG, "➡️ App lock NOT enabled - going directly to dashboard");
-                navigateToDashboard();
-            }
-
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Error in checkAppLockAndNavigate: " + e.getMessage());
             navigateToDashboard();
         }
-    }
-
-    private void showFingerprintAuthentication() {
-        try {
-            Log.d(TAG, "🔄 Showing fingerprint authentication dialog");
-
-            androidx.appcompat.app.AlertDialog.Builder builder =
-                    new androidx.appcompat.app.AlertDialog.Builder(this);
-
-            builder.setTitle("🔒 App Lock")
-                    .setMessage("Fingerprint lock is enabled\n\nAuthenticate to open Asan Khata")
-                    .setCancelable(false)
-                    .setPositiveButton("Use Password", (dialog, which) -> {
-                        Log.d(TAG, "✅ User chose password option");
-                        showPasswordDialog();
-                    })
-                    .setNegativeButton("Cancel", (dialog, which) -> {
-                        Log.d(TAG, "❌ User clicked Cancel");
-                        // App band karo
-                        finishAffinity();
-                    });
-
-            // ✅ Dialog show karne se pehle check karo ke activity still alive hai
-            if (!isFinishing() && !isDestroyed()) {
-                androidx.appcompat.app.AlertDialog dialog = builder.create();
-                dialog.show();
-                Log.d(TAG, "✅ Fingerprint dialog shown successfully");
-            } else {
-                Log.e(TAG, "❌ Activity finishing/destroyed - cannot show dialog");
-                navigateToDashboard();
-            }
-
-        } catch (Exception e) {
-            Log.e(TAG, "❌ Error showing fingerprint auth: " + e.getMessage());
-            navigateToDashboard();
-        }
-    }
-    private void showPasswordDialog() {
-        androidx.appcompat.app.AlertDialog.Builder builder =
-                new androidx.appcompat.app.AlertDialog.Builder(this);
-
-        builder.setTitle("Enter Password")
-                .setMessage("Enter your password to unlock the app")
-                .setCancelable(false)
-                .setPositiveButton("Unlock", (dialog, which) -> {
-                    Log.d(TAG, "✅ Password accepted");
-                    navigateToDashboard();
-                })
-                .setNegativeButton("Exit", (dialog, which) -> {
-                    finishAffinity();
-                });
-
-        builder.create().show();
     }
 
     private void navigateToDashboard() {
